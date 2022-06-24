@@ -39,8 +39,7 @@ class _MainPageState extends State<MainPage> {
                     style: TextStyle(color: Colors.white, fontSize: 22),
                   ),
                   Text(
-                    "₹" +
-                        totalPerPerson(billAmount, tipPercentage, personCount),
+                    "₹ ${(totalPerPerson(billAmount, tipPercentage, personCount)).toStringAsFixed(2)}",
                     style: TextStyle(color: Colors.white, fontSize: 19),
                   )
                 ],
@@ -178,21 +177,20 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
+  totalPerPerson(double billAmount, int tipPercentage, int person) {
+    var totalPerPerson =
+        (CalcTotalTip(billAmount, tipPercentage) + billAmount) / person;
+    return totalPerPerson;
+  }
+
   CalcTotalTip(double billAmount, int tipPercentage) {
     double totalTip = 0.0;
     if (billAmount < 0 || billAmount.toString().isEmpty || billAmount == null) {
     } else {
       totalTip = (billAmount * tipPercentage / 100);
     }
-    return totalTip.toStringAsFixed(2);
+    return totalTip;
   }
-
-  totalPerPerson(double billAmount, int tipPercentage, int person) {
-    var totalPerPerson =
-        (CalcTotalTip(billAmount, tipPercentage) + billAmount) / person;
-    return totalPerPerson;
-  }
-  //
 }
 
 //  person , billAmount , tip
